@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>626956968115-bo2bpjl7lantbdoe9qak7luoqk24n9mn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.626956968115-bo2bpjl7lantbdoe9qak7luoqk24n9mn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCi4CE_SFKbKNttdQW14CLKJ6ENzpBr5PQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>626956968115</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.flutterApp</string>
+	<key>PROJECT_ID</key>
+	<string>blinkapp-4d62f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>blinkapp-4d62f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:626956968115:ios:a6a2247d1eee94569390c6</string>
+	<key>DATABASE_URL</key>
+	<string>https://blinkapp-4d62f.firebaseio.com</string>
+</dict>
+</plist>

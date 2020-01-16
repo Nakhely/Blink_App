@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "626956968115",
+    "firebase_url": "https://blinkapp-4d62f.firebaseio.com",
+    "project_id": "blinkapp-4d62f",
+    "storage_bucket": "blinkapp-4d62f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626956968115:android:209815778fe764139390c6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "626956968115-8p4v54dp57ol01av7bag7d24pivtnn1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYrBjc1fpdvI2Ae0VBCfePGVvL4pqY8ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626956968115-8p4v54dp57ol01av7bag7d24pivtnn1c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "626956968115-bo2bpjl7lantbdoe9qak7luoqk24n9mn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
