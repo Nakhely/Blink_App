@@ -44,7 +44,9 @@ class _SplashScreenView extends State<SpashScreenView> {
                 ],
               ),
             ),
-            SizedBox(height: 50),
+
+            SizedBox(height: 40),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 32),
               child: Row(
@@ -54,7 +56,31 @@ class _SplashScreenView extends State<SpashScreenView> {
                   )
                 ],
               ),
-            )
+            ),
+
+            SizedBox(height: 30),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: signInButton(context),
+                  )
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: singUpButton(context),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       )
@@ -87,6 +113,44 @@ class _SplashScreenView extends State<SpashScreenView> {
         Icons.lock,
         color: Color.fromRGBO(210, 206, 229, 1),
       )),
+    );
+  }
+
+  Widget signInButton(BuildContext context) {
+    return RaisedButton(
+      onPressed: () {
+        print('usefull');
+      },
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      color: Color.fromRGBO(210, 206, 229, 1),
+      child: Text(
+        'Enter',
+        style: TextStyle(
+          fontSize: 16
+        ),
+      ),
+    );
+  }
+
+  Widget singUpButton(BuildContext context) {
+    return FlatButton(
+      onPressed: () {
+
+      },
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(color: Color.fromRGBO(210, 206, 229, 1))
+      ),
+
+      child: Text(
+        'Sign up',
+        style: TextStyle(
+          color: Color.fromRGBO(210, 206, 229, 1),
+          fontSize: 16
+        ),
+      ),
     );
   }
 
