@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/User.dart';
 import 'package:flutter_app/services/FirebaseAuthentication.dart';
+import 'package:progress_dialog/progress_dialog.dart';
+
 String _name, _firstSurname, _secondSurname, _email, _password;
 
 class SignUpView extends StatefulWidget {
@@ -78,6 +80,10 @@ class _SignUpView extends State<SignUpView> {
     return TextFormField (
       onChanged: (value) => _name = value,
       decoration: decorationInput(labelName, hintText),
+      style: TextStyle(
+          color: Color.fromRGBO(210, 206, 229, 1),
+          fontSize: 16
+      ),
     );
   }
 
@@ -85,6 +91,10 @@ class _SignUpView extends State<SignUpView> {
     return TextFormField (
       onChanged: (value) => _firstSurname = value,
       decoration: decorationInput(labelName, hintText),
+      style: TextStyle(
+          color: Color.fromRGBO(210, 206, 229, 1),
+          fontSize: 16
+      ),
     );
   }
 
@@ -92,6 +102,10 @@ class _SignUpView extends State<SignUpView> {
     return TextFormField (
       onChanged: (value) => _secondSurname = value,
       decoration: decorationInput(labelName, hintText),
+      style: TextStyle(
+          color: Color.fromRGBO(210, 206, 229, 1),
+          fontSize: 16
+      ),
     );
   }
 
@@ -100,6 +114,10 @@ class _SignUpView extends State<SignUpView> {
       keyboardType: TextInputType.emailAddress,
       onChanged: (value) => _email = value,
       decoration: decorationInput(labelName, hintText),
+      style: TextStyle(
+          color: Color.fromRGBO(210, 206, 229, 1),
+          fontSize: 16
+      ),
     );
   }
 
@@ -108,13 +126,17 @@ class _SignUpView extends State<SignUpView> {
       obscureText: true,
       onChanged: (value) => _password = value,
       decoration: decorationInput(labelName, hintText),
+      style: TextStyle(
+          color: Color.fromRGBO(210, 206, 229, 1),
+          fontSize: 16
+      ),
     );
   }
 
   Widget registerButton(BuildContext context) {
     return RaisedButton(
       onPressed: () {
-        registerUser(User(_name, _firstSurname, _secondSurname, _email, _password));
+        registerUser(User(_name, _firstSurname, _secondSurname), context, _email, _password);
       },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),

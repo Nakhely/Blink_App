@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: true, //Put False in production step
-      home: SignInView(),
 
       /* I need define routes for navigation of aplication */
       routes: <String, WidgetBuilder>{
+        '/' : (BuildContext context) => SignInView(),
         '/signup' : (BuildContext context) => SignUpView(),
       },
     );
