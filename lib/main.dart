@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/views/SignUpView.dart';
 
-import 'views/SpashScreen.dart';
+import 'views/SignInView.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,12 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: true, //Put False in production step
-      home: SpashScreenView(),
+      home: SignInView(),
 
       /* I need define routes for navigation of aplication */
       routes: <String, WidgetBuilder>{
-        '/signin' : (BuildContext context) => null,
-        '/signin/signup' : (BuildContext context) => null,
+        '/signup' : (BuildContext context) => SignUpView(),
       },
     );
   }

@@ -2,13 +2,13 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SpashScreenView extends StatefulWidget {
+class SignInView extends StatefulWidget {
 
   @override
-  _SplashScreenView createState() => _SplashScreenView();
+  _SignInView createState() => _SignInView();
 }
 
-class _SplashScreenView extends State<SpashScreenView> {
+class _SignInView extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -137,6 +137,7 @@ class _SplashScreenView extends State<SpashScreenView> {
   Widget singUpButton(BuildContext context) {
     return FlatButton(
       onPressed: () {
+        Navigator.pushNamed(context, '/signup');
 
       },
       shape: RoundedRectangleBorder(
