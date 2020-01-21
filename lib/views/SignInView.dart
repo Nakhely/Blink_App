@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/User.dart';
 import 'package:flutter_app/services/FirebaseAuthentication.dart';
+import 'package:flutter_app/views/HomeView.dart';
+import 'package:flutter_app/views/ProfileView.dart';
 
 String _email, _password;
 
@@ -125,8 +127,11 @@ class _SignInView extends State<SignInView> {
   Widget signInButton(BuildContext context) {
     return RaisedButton(
       onPressed: () async {
-        await loginUser(_email, _password, context).then((value) => {
-          print(value.name)
+        User user;
+        await loginUser(_email.trim(), _password, context).then((value) => {
+          user = User(value.name, value.firstSurname, value.secondSurname),
+          print(user.name),
+          Navigator.of(context).push(MaterialPageRoute (builder: (BuildContext context) => HomeView(user: user)))
         });
       },
       shape: RoundedRectangleBorder(
@@ -178,5 +183,6 @@ class _SignInView extends State<SignInView> {
         )
     );
   }
+
 
 }

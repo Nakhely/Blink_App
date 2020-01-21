@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/views/HomeView.dart';
+import 'package:flutter_app/views/ProfileView.dart';
 import 'package:flutter_app/views/SignUpView.dart';
 
 import 'views/SignInView.dart';
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/' : (BuildContext context) => SignInView(),
         '/signup' : (BuildContext context) => SignUpView(),
+        '/home' : (BuildContext context) => HomeView()
       },
     );
   }
