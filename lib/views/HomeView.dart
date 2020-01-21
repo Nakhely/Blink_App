@@ -34,6 +34,7 @@ class _HomeView extends State<HomeView> {
         child: tabs[_currentIndex],
       ),
       bottomNavigationBar: BottomNavigationBar (
+        iconSize: 30,
         backgroundColor: Color.fromRGBO(53, 50, 69, 1),
         currentIndex: _currentIndex,
         items: [

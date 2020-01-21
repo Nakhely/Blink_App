@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/User.dart';
 import 'package:flutter_app/services/FirebaseAuthentication.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 
 String _name, _firstSurname, _secondSurname, _email, _password;
 
@@ -136,7 +135,7 @@ class _SignUpView extends State<SignUpView> {
   Widget registerButton(BuildContext context) {
     return RaisedButton(
       onPressed: () {
-        registerUser(User(_name, _firstSurname, _secondSurname), context, _email, _password);
+        registerUser(User('', _name, _firstSurname, _secondSurname, 'default.png'), context, _email, _password);
       },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),

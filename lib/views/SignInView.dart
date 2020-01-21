@@ -129,7 +129,7 @@ class _SignInView extends State<SignInView> {
       onPressed: () async {
         User user;
         await loginUser(_email.trim(), _password, context).then((value) => {
-          user = User(value.name, value.firstSurname, value.secondSurname),
+          user = User(value.id, value.name, value.firstSurname, value.secondSurname, value.urlProfile),
           print(user.name),
           Navigator.of(context).push(MaterialPageRoute (builder: (BuildContext context) => HomeView(user: user)))
         });
