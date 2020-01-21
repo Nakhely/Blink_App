@@ -49,7 +49,7 @@ class _EditProfileView extends State<EditProfileView> {
       ),
       backgroundColor: Color.fromRGBO(71, 67, 93, 1),
       body: FutureBuilder (
-        future: downloadImage(widget.user.urlProfile),
+        future: (widget.user.hasProfile == true) ? downloadImage(widget.user.id) : downloadImage('default.png'),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container (
@@ -143,7 +143,8 @@ class _EditProfileView extends State<EditProfileView> {
   Widget saveButton (BuildContext context) {
     return FlatButton (
       onPressed: () async {
-       await uploadImageToFirebaseStorage(context, widget.user.urlProfile, _image);
+       await uploadImageToFirebaseStorage(context, widget.user, widget.user.id, _image);
+       widget.user.hasProfile = true;
       },
       child: Text (
         'Save profile picture',

@@ -3,12 +3,12 @@ class User {
   String name;
   String firstSurname;
   String secondSurname;
-  String urlProfile;
+  bool hasProfile;
 
   User(
       this.id,
       this.name,
       this.firstSurname,
       this.secondSurname,
-      this.urlProfile);
+      this.hasProfile);
 }

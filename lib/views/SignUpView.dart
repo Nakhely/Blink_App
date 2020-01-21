@@ -135,7 +135,7 @@ class _SignUpView extends State<SignUpView> {
   Widget registerButton(BuildContext context) {
     return RaisedButton(
       onPressed: () {
-        registerUser(User('', _name, _firstSurname, _secondSurname, 'default.png'), context, _email, _password);
+        registerUser(User('', _name, _firstSurname, _secondSurname, false), context, _email, _password);
       },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),

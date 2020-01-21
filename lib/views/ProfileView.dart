@@ -22,7 +22,7 @@ class _ProfileView extends State<ProfileView> {
     return Scaffold (
       backgroundColor: Color.fromRGBO(71, 67, 93, 1),
       body: FutureBuilder(
-        future: downloadImage(widget.user.urlProfile),
+        future: (widget.user.hasProfile != false) ? downloadImage(widget.user.id) : downloadImage('default.png'),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container (

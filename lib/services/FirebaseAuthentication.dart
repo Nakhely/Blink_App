@@ -19,7 +19,7 @@ void registerUser(User user, BuildContext context, String email, String password
           "name" : user.name,
           "first_surname" : user.firstSurname,
           "second_surname" : user.secondSurname,
-          "profile_url" : user.urlProfile,
+          "has_profile" : user.hasProfile,
       }
       )
   ).then((result) => {
@@ -34,7 +34,8 @@ Future<User> loginUser(String email, String password, BuildContext context) asyn
   _progressDialog.show();
   
   User user;
-  String _id, _name, _first_surname, _second_surname, _url_profile;
+  String _id, _name, _first_surname, _second_surname;
+  bool _hasProfile;
 
   await FirebaseAuth.instance
       .signInWithEmailAndPassword(email: email, password: password)
@@ -45,11 +46,11 @@ Future<User> loginUser(String email, String password, BuildContext context) asyn
         _name = result['name'],
         _first_surname = result['first_surname'],
         _second_surname = result['second_surname'],
-        _url_profile = result['profile_url'],
+        _hasProfile = result['has_profile'],
 
-        user = User(_id, _name, _first_surname, _second_surname, _url_profile),
+        user = User(_id, _name, _first_surname, _second_surname, _hasProfile),
         _progressDialog.dismiss(),
-        print(user.name + user.firstSurname + user.secondSurname),
+        print(user.name + user.firstSurname + user.secondSurname + user.hasProfile.toString()),
       }).catchError((error) => print(error)).catchError((error2) => print(error2)));
       
       return user;
@@ -63,7 +64,7 @@ Future updateUserInformation (User user, BuildContext context) async {
     "name" : user.name,
     "first_surname" : user.firstSurname,
     "second_surname" : user.secondSurname,
-    "profile_url" : user.urlProfile,
+    "has_profile" : user.hasProfile,
   }).then((result) => {
     print('succesfull'),
     _progressDialog.dismiss()
