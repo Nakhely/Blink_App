@@ -21,72 +21,86 @@ class _SignInView extends State<SignInView> {
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(53, 50, 69, 1),
-      body: Center(
+      body: Align(
+        alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Padding (
-                  padding: EdgeInsets.symmetric(vertical: 0),
-                  child: SizedBox(
-                    width: media.width,
-                    height: 200,
-                    child: FlareActor('assets/blink.flr',
-                      alignment: Alignment.center,
-                      animation: 'blink',),
-                  ),
+
+            Expanded (
+              child: Align (
+                alignment: Alignment.center,
+                child: ListView (
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Padding (
+                          padding: EdgeInsets.symmetric(vertical: 0),
+                          child: SizedBox(
+                            width: media.width,
+                            height: 200,
+                            child: FlareActor('assets/blink.flr',
+                              alignment: Alignment.center,
+                              animation: 'blink',),
+                          ),
+                        )
+                      ],
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 32),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: emailField(context),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 40),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 32),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: passwordField(context),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 30),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 32),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: signInButton(context),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 32),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: singUpButton(context),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 )
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: emailField(context),
-                  )
-                ],
-              ),
-            ),
-
-            SizedBox(height: 40),
-
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: passwordField(context),
-                  )
-                ],
-              ),
-            ),
-
-            SizedBox(height: 30),
-
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: signInButton(context),
-                  )
-                ],
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: singUpButton(context),
-                  )
-                ],
-              ),
-            ),
+              )
+            )
           ],
         ),
       )
