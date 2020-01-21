@@ -1,41 +1,28 @@
 
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/User.dart';
+import 'package:flutter_app/services/FirebaseStorage.dart';
 import 'package:flutter_app/views/EditProfileView.dart';
 
 class ProfileView extends StatefulWidget {
   final User user;
   ProfileView({Key key, this.user}) : super(key : key);
-  //ProfileView(User user)
+
   @override
   _ProfileView createState() => _ProfileView();
 
 }
 
 class _ProfileView extends State<ProfileView> {
-  StorageReference _reference;
-
-  Future<String> downloadImage() async {
-    String _downloadUrl = await _reference.getDownloadURL();
-    print(_downloadUrl);
-
-    return _downloadUrl;
-  }
-
-  @override
-  void initState() {
-    _reference = FirebaseStorage.instance.ref().child(widget.user.urlProfile);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
       backgroundColor: Color.fromRGBO(71, 67, 93, 1),
       body: FutureBuilder(
-        future: downloadImage(),
+        future: downloadImage(widget.user.urlProfile),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container (
@@ -51,13 +38,18 @@ class _ProfileView extends State<ProfileView> {
                           ],
                         )
                     ),
-                    Text (
-                      '${widget.user.name}  ${widget.user.firstSurname} ${widget.user.secondSurname}',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Color.fromRGBO(210, 206, 229, 1)
+                    Padding (
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: AutoSizeText (
+                        '${widget.user.name}  ${widget.user.firstSurname} ${widget.user.secondSurname}',
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromRGBO(210, 206, 229, 1)
+                        ),
+                        maxLines: 1,
                       ),
                     ),
+
                     Padding (
                       padding: EdgeInsets.symmetric(vertical: 32, horizontal: 64),
                       child: Container (
@@ -93,11 +85,11 @@ class _ProfileView extends State<ProfileView> {
         borderRadius: BorderRadius.circular(10),
       ),
       color: Color.fromRGBO(210, 206, 229, 1),
-      child: Text (
+      child: AutoSizeText (
         'Edit profile',
         style: TextStyle (
           fontSize: 16
-        )
+        ),
       ),
     );
   }

@@ -1,11 +1,11 @@
 
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/User.dart';
 import 'package:flutter_app/services/FirebaseAuthentication.dart';
+import 'package:flutter_app/services/FirebaseStorage.dart';
 import 'package:image_picker/image_picker.dart';
 
 File _image;
@@ -20,37 +20,23 @@ class EditProfileView extends StatefulWidget {
 }
 
 class _EditProfileView extends State<EditProfileView> {
-  StorageReference _reference;
-
-  Future<String> downloadImage() async {
-    String _downloadUrl = await _reference.getDownloadURL();
-    print(_downloadUrl);
-
-    return _downloadUrl;
-  }
-
   Future getImageFromGallery () async {
     var image = await ImagePicker .pickImage(source: ImageSource.gallery);
     setState(() {
       _image = image;
     });
   }
-  
-  Future uploadImageToFirebaseStorage () async {
-    _image.rename(widget.user.name + '.png');
-    StorageReference storageReference = FirebaseStorage.instance.ref().child(widget.user.name + '.png');
-    StorageUploadTask uploadTask = storageReference.putFile(_image);
-    await uploadTask.onComplete;
 
+  Future getImageFromCamera () async {
+    var image = await ImagePicker .pickImage(source: ImageSource.camera);
     setState(() {
-      print('Succesfull');
+      _image = image;
     });
   }
 
   @override
   void initState() {
     _image = null;
-    _reference = FirebaseStorage.instance.ref().child(widget.user.urlProfile);
     super.initState();
   }
 
@@ -63,7 +49,7 @@ class _EditProfileView extends State<EditProfileView> {
       ),
       backgroundColor: Color.fromRGBO(71, 67, 93, 1),
       body: FutureBuilder (
-        future: downloadImage(),
+        future: downloadImage(widget.user.urlProfile),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container (
@@ -83,7 +69,8 @@ class _EditProfileView extends State<EditProfileView> {
                   Row (
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      changePhotoButton(context)
+                      changePhotoButtonFromGallery(context),
+                      changePhotoButtonFromCamera(context)
                     ],
                   ),
 
@@ -116,8 +103,6 @@ class _EditProfileView extends State<EditProfileView> {
                       ],
                     ),
                   )
-
-
                 ],
               ),
             );
@@ -133,15 +118,24 @@ class _EditProfileView extends State<EditProfileView> {
     return CircleAvatar (
       backgroundColor: Color.fromRGBO(210, 206, 229, 1),
       radius: 70.0,
-      backgroundImage: (_image != null) ? AssetImage(_image.path) : NetworkImage(url)
+      backgroundImage: (_image != null) ? FileImage(_image) : NetworkImage(url)
     );
   }
 
-  Widget changePhotoButton (BuildContext context) {
+  Widget changePhotoButtonFromGallery (BuildContext context) {
+    return IconButton (
+      icon: Icon (Icons.photo_library, color: Color.fromRGBO(210, 206, 229, 1)),
+      onPressed: () async {
+        getImageFromGallery();
+      },
+    );
+  }
+
+  Widget changePhotoButtonFromCamera (BuildContext context) {
     return IconButton (
       icon: Icon (Icons.add_a_photo, color: Color.fromRGBO(210, 206, 229, 1)),
       onPressed: () async {
-        getImageFromGallery();
+        getImageFromCamera();
       },
     );
   }
@@ -149,7 +143,7 @@ class _EditProfileView extends State<EditProfileView> {
   Widget saveButton (BuildContext context) {
     return FlatButton (
       onPressed: () async {
-       await uploadImageToFirebaseStorage();
+       await uploadImageToFirebaseStorage(context, widget.user.urlProfile, _image);
       },
       child: Text (
         'Save profile picture',
@@ -224,7 +218,7 @@ class _EditProfileView extends State<EditProfileView> {
   Widget saveInformationButton(BuildContext context) {
     return RaisedButton(
       onPressed: () async{
-        await updateUserInformation(widget.user);
+        await updateUserInformation(widget.user, context);
       },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),

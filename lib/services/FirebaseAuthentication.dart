@@ -7,9 +7,8 @@ import 'package:flutter_app/models/User.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 void registerUser(User user, BuildContext context, String email, String password) {
-  ProgressDialog progressDialog = ProgressDialog(context, type: ProgressDialogType.Normal);
-  progressDialog.style(message: "Please wait");
-  progressDialog.show();
+  ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal, 'Please wait');
+  _progressDialog.show();
 
   FirebaseAuth.instance
       .createUserWithEmailAndPassword(email: email, password: password)
@@ -25,15 +24,14 @@ void registerUser(User user, BuildContext context, String email, String password
       )
   ).then((result) => {
     print('Succesfull'),
-    progressDialog.dismiss(),
+    _progressDialog.dismiss(),
     _alert(context)
   }).catchError((error) => print(error)).catchError((error2) => print(error2));
 }
 
 Future<User> loginUser(String email, String password, BuildContext context) async {
-  ProgressDialog progressDialog = ProgressDialog(context, type: ProgressDialogType.Normal);
-  progressDialog.style(message: "Please wait");
-  progressDialog.show();
+  ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal, 'Please wait');
+  _progressDialog.show();
   
   User user;
   String _id, _name, _first_surname, _second_surname, _url_profile;
@@ -50,14 +48,16 @@ Future<User> loginUser(String email, String password, BuildContext context) asyn
         _url_profile = result['profile_url'],
 
         user = User(_id, _name, _first_surname, _second_surname, _url_profile),
-        progressDialog.dismiss(),
+        _progressDialog.dismiss(),
         print(user.name + user.firstSurname + user.secondSurname),
       }).catchError((error) => print(error)).catchError((error2) => print(error2)));
       
       return user;
 }
 
-Future updateUserInformation (User user) async {
+Future updateUserInformation (User user, BuildContext context) async {
+  ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal, 'Please wait');
+  _progressDialog.show();
   Firestore.instance.collection('users').document(user.id).setData({
     "id" : user.id,
     "name" : user.name,
@@ -65,7 +65,8 @@ Future updateUserInformation (User user) async {
     "second_surname" : user.secondSurname,
     "profile_url" : user.urlProfile,
   }).then((result) => {
-    print('succesfull')
+    print('succesfull'),
+    _progressDialog.dismiss()
   }).catchError((error) => print(error));
 }
 
@@ -87,4 +88,11 @@ Future<void> _alert (BuildContext context) {
       );
     }
   );
+}
+
+ProgressDialog progressDialog (BuildContext context, ProgressDialogType progressDialogType, String message) {
+  ProgressDialog progressDialog = ProgressDialog (context, type: progressDialogType);
+  progressDialog.style(message: message);
+
+  return progressDialog;
 }
