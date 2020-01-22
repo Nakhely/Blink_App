@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/User.dart';
 import 'package:flutter_app/services/FirebaseStorage.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,6 +11,9 @@ File _image;
 String _message;
 
 class CreatePostView extends StatefulWidget {
+  final User user;
+
+  const CreatePostView({Key key, this.user}) : super(key: key);
 
   @override
   _CreatePostView createState() => _CreatePostView();
@@ -146,7 +150,8 @@ class _CreatePostView extends State<CreatePostView> {
       iconSize: 35,
       icon: Icon (Icons.send, color: Color.fromRGBO(71, 67, 93, 1)),
       onPressed: () async {
-        publisPost(context, _image, _message);
+        String userName = widget.user.name + ' ' + widget.user.firstSurname + ' ' + widget.user.secondSurname;
+        publisPost(context, _image, _message, userName, widget.user.id);
       },
     );
   }
