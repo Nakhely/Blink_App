@@ -3,9 +3,10 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import 'package:flutter_app/models/User.dart';
+import 'package:Blink/models/User.dart';
 
 Future<String> downloadImage(String reference) async {
   StorageReference _reference = FirebaseStorage.instance.ref().child(reference);
@@ -33,7 +34,7 @@ Future uploadImageToFirebaseStorage (BuildContext context, User user, String ref
   StorageTaskSnapshot sts = await uploadTask.onComplete;
 
   _progressDialog.dismiss();
-  print('Succesful');
+  _alertUpdateProfilePictures(context);
 }
 
 Future publisPost (BuildContext context, File image, String message, String userName, String idUser) async {
@@ -58,7 +59,7 @@ Future publisPost (BuildContext context, File image, String message, String user
   });
 
   _progressDialog.dismiss();
-  print('Succesful');
+  _alertPublisSuccesfull(context);
 }
 
 /*Future <List<Post>> getAllPosts () async{
@@ -70,5 +71,43 @@ ProgressDialog progressDialog (BuildContext context, ProgressDialogType progress
   progressDialog.style(message: message);
 
   return progressDialog;
+}
+
+Future<void> _alertPublisSuccesfull (BuildContext context) {
+  return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Published correctly'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
+  );
+}
+
+Future<void> _alertUpdateProfilePictures (BuildContext context) {
+  return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Profile picture updated'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
+  );
 }
 

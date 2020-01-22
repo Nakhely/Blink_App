@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/views/HomeView.dart';
-import 'package:flutter_app/views/SignUpView.dart';
+import 'package:Blink/views/HomeView.dart';
+import 'package:Blink/views/SignUpView.dart';
 
 import 'views/SignInView.dart';
 

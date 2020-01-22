@@ -1,10 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/User.dart';
-import 'package:flutter_app/views/CreatePostView.dart';
-import 'package:flutter_app/views/PostListView.dart';
-import 'package:flutter_app/views/ProfileView.dart';
+import 'package:Blink/models/User.dart';
+import 'package:Blink/views/CreatePostView.dart';
+import 'package:Blink/views/PostListView.dart';
+import 'package:Blink/views/ProfileView.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
 class HomeView extends StatefulWidget {

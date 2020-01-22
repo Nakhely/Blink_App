@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/User.dart';
-import 'package:flutter_app/services/FirebaseAuthentication.dart';
-import 'package:flutter_app/services/FirebaseStorage.dart';
+import 'package:Blink/models/User.dart';
+import 'package:Blink/services/FirebaseAuthentication.dart';
+import 'package:Blink/services/FirebaseStorage.dart';
 import 'package:image_picker/image_picker.dart';
 
 File _image;

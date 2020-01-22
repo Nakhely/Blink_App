@@ -1,10 +1,10 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/User.dart';
-import 'package:flutter_app/services/FirebaseAuthentication.dart';
-import 'package:flutter_app/views/HomeView.dart';
-import 'package:flutter_app/views/ProfileView.dart';
+import 'package:Blink/models/User.dart';
+import 'package:Blink/services/FirebaseAuthentication.dart';
+import 'package:Blink/views/HomeView.dart';
+import 'package:Blink/views/ProfileView.dart';
 
 String _email, _password;
 

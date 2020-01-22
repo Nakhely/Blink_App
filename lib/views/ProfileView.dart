@@ -2,9 +2,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/User.dart';
-import 'package:flutter_app/services/FirebaseStorage.dart';
-import 'package:flutter_app/views/EditProfileView.dart';
+import 'package:Blink/models/User.dart';
+import 'package:Blink/services/FirebaseStorage.dart';
+import 'package:Blink/views/EditProfileView.dart';
 
 class ProfileView extends StatefulWidget {
   final User user;

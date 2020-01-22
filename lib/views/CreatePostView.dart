@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/User.dart';
-import 'package:flutter_app/services/FirebaseStorage.dart';
+import 'package:Blink/models/User.dart';
+import 'package:Blink/services/FirebaseStorage.dart';
 import 'package:image_picker/image_picker.dart';
 
 File _image;
@@ -32,6 +32,25 @@ class _CreatePostView extends State<CreatePostView> {
   void initState() {
     _image = null;
     super.initState();
+  }
+
+  Future<void> _alert (BuildContext context) {
+    return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Select a photo and write a message'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Ok'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        }
+    );
   }
 
   @override
@@ -150,8 +169,12 @@ class _CreatePostView extends State<CreatePostView> {
       iconSize: 35,
       icon: Icon (Icons.send, color: Color.fromRGBO(71, 67, 93, 1)),
       onPressed: () async {
-        String userName = widget.user.name + ' ' + widget.user.firstSurname + ' ' + widget.user.secondSurname;
-        publisPost(context, _image, _message, userName, widget.user.id);
+        if (_image == null || _message == null) {
+          _alert(context);
+        } else {
+          String userName = widget.user.name + ' ' + widget.user.firstSurname + ' ' + widget.user.secondSurname;
+          publisPost(context, _image, _message, userName, widget.user.id);
+        }
       },
     );
   }

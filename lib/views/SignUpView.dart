@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/User.dart';
-import 'package:flutter_app/services/FirebaseAuthentication.dart';
+import 'package:Blink/models/User.dart';
+import 'package:Blink/services/FirebaseAuthentication.dart';
 
 String _name, _firstSurname, _secondSurname, _email, _password;
 
