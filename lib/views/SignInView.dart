@@ -27,7 +27,6 @@ class _SignInView extends State<SignInView> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
             Expanded (
               child: Align (
                 alignment: Alignment.center,

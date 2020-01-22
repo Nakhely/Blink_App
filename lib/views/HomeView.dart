@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/User.dart';
+import 'package:flutter_app/views/CreatePostView.dart';
 import 'package:flutter_app/views/ProfileView.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
@@ -22,6 +23,7 @@ class _HomeView extends State<HomeView> {
   void initState() {
     tabs = [
       Center (child: Text('sida')),
+      CreatePostView (),
       ProfileView(user: widget.user)
     ];
     super.initState();
@@ -41,6 +43,12 @@ class _HomeView extends State<HomeView> {
           BottomNavigationBarItem(
             icon: Icon(OMIcons.home, color: Color.fromRGBO(210, 206, 229, 1)),
             activeIcon: Icon(Icons.home, color: Color.fromRGBO(210, 206, 229, 1)),
+            title: Text('Home', style: TextStyle (color: Color.fromRGBO(210, 206, 229, 1)),),
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(OMIcons.addBox, color: Color.fromRGBO(210, 206, 229, 1)),
+            activeIcon: Icon(Icons.add_box, color: Color.fromRGBO(210, 206, 229, 1)),
             title: Text('Home', style: TextStyle (color: Color.fromRGBO(210, 206, 229, 1)),),
           ),
 

@@ -19,25 +19,40 @@ Future uploadImageToFirebaseStorage (BuildContext context, User user, String ref
   ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal, 'Please wait');
   _progressDialog.show();
 
-  Firestore.instance.collection('users').document(user.id).setData({
+  await Firestore.instance.collection('users').document(user.id).setData({
     "id" : user.id,
     "name" : user.name,
     "first_surname" : user.firstSurname,
     "second_surname" : user.secondSurname,
     "has_profile" : true,
-  }).then((result) => {
-    print('succesfull'),
-    _progressDialog.dismiss()
-  }).catchError((error) => print(error));
-
-  _progressDialog.show();
+  });
 
   StorageReference storageReference = FirebaseStorage.instance.ref().child(reference);
   StorageUploadTask uploadTask = storageReference.putFile(image);
-  await uploadTask.onComplete.then((result) => {
-    _progressDialog.dismiss(),
-    print('Succesful')
+
+  StorageTaskSnapshot sts = await uploadTask.onComplete;
+
+  _progressDialog.dismiss();
+  print('Succesful');
+}
+
+Future publisPost (BuildContext context, File image, String message) async {
+  ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal, 'Please wait');
+  _progressDialog.show();
+  String date = DateTime.now().toString();
+
+  await Firestore.instance.collection('posts').add({
+    "message" : message,
+    "url_image" : date
   });
+
+  StorageReference storageReference = FirebaseStorage.instance.ref().child(date);
+  StorageUploadTask uploadTask = storageReference.putFile(image);
+
+  StorageTaskSnapshot sts = await uploadTask.onComplete;
+
+  _progressDialog.dismiss();
+  print('Succesful');
 }
 
 ProgressDialog progressDialog (BuildContext context, ProgressDialogType progressDialogType, String message) {

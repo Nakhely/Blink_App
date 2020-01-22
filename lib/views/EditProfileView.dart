@@ -21,14 +21,14 @@ class EditProfileView extends StatefulWidget {
 
 class _EditProfileView extends State<EditProfileView> {
   Future getImageFromGallery () async {
-    var image = await ImagePicker .pickImage(source: ImageSource.gallery);
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       _image = image;
     });
   }
 
   Future getImageFromCamera () async {
-    var image = await ImagePicker .pickImage(source: ImageSource.camera);
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
       _image = image;
     });
