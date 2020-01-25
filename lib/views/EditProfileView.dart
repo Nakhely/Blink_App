@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:Blink/services/ImagePickerController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Blink/models/User.dart';
@@ -20,20 +21,6 @@ class EditProfileView extends StatefulWidget {
 }
 
 class _EditProfileView extends State<EditProfileView> {
-  Future getImageFromGallery () async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = image;
-    });
-  }
-
-  Future getImageFromCamera () async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-    setState(() {
-      _image = image;
-    });
-  }
-
   @override
   void initState() {
     _image = null;
@@ -126,7 +113,7 @@ class _EditProfileView extends State<EditProfileView> {
     return IconButton (
       icon: Icon (Icons.photo_library, color: Color.fromRGBO(210, 206, 229, 1)),
       onPressed: () async {
-        getImageFromGallery();
+        _image = await getImageFromGallery();
       },
     );
   }
@@ -135,7 +122,7 @@ class _EditProfileView extends State<EditProfileView> {
     return IconButton (
       icon: Icon (Icons.add_a_photo, color: Color.fromRGBO(210, 206, 229, 1)),
       onPressed: () async {
-        getImageFromCamera();
+        _image = await getImageFromCamera();
       },
     );
   }

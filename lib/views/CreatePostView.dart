@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:Blink/services/ImagePickerController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Blink/models/User.dart';
@@ -20,13 +21,6 @@ class CreatePostView extends StatefulWidget {
 }
 
 class _CreatePostView extends State<CreatePostView> {
-
-  Future getImageFromGallery () async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = image;
-    });
-  }
 
   @override
   void initState() {
@@ -149,7 +143,7 @@ class _CreatePostView extends State<CreatePostView> {
       iconSize: 80,
       icon: Icon (Icons.add_photo_alternate, color: Color.fromRGBO(210, 206, 229, 1)),
       onPressed: () async {
-        getImageFromGallery();
+        _image = await getImageFromGallery();
       },
     );
   }
@@ -159,7 +153,7 @@ class _CreatePostView extends State<CreatePostView> {
       iconSize: 35,
       icon: Icon (Icons.add_photo_alternate, color: Color.fromRGBO(71, 67, 93, 1)),
       onPressed: () async {
-        getImageFromGallery();
+        _image = await getImageFromGallery();
       },
     );
   }
