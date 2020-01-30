@@ -9,3 +9,7 @@ Future <File> getImageFromGallery () async {
 Future <File> getImageFromCamera () async {
   return await ImagePicker.pickImage(source: ImageSource.camera);
 }
+
+Future <File> getVideoFromGallery () async {
+  return await ImagePicker.pickVideo(source: ImageSource.gallery);
+}
