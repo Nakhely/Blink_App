@@ -7,7 +7,7 @@ import 'package:Blink/models/User.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 void registerUser(User user, BuildContext context, String email, String password) {
-  ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal, 'Please wait');
+  ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal,'Please wait');
   _progressDialog.show();
 
   FirebaseAuth.instance
@@ -24,7 +24,7 @@ void registerUser(User user, BuildContext context, String email, String password
       )
   ).then((result) => {
     print('Succesfull'),
-    _progressDialog.dismiss(),
+    _progressDialog.hide(),
     _alert(context)
   }).catchError((error) => print(error)).catchError((error2) => print(error2));
 }
@@ -49,10 +49,10 @@ Future<User> loginUser(String email, String password, BuildContext context) asyn
         _hasProfile = result['has_profile'];
 
         user = User(_id, _name, _first_surname, _second_surname, _hasProfile);
-        _progressDialog.dismiss();
+        _progressDialog.hide();
         print(user.name + user.firstSurname + user.secondSurname + user.hasProfile.toString());
       }).catchError((error) {}).catchError((error2) => print(error2))).catchError((error3) {
-    _progressDialog.dismiss();
+    _progressDialog.hide();
     _alertErrorAuthentication(context);
   });
 
@@ -69,7 +69,7 @@ Future updateUserInformation (User user, BuildContext context) async {
     "second_surname" : user.secondSurname,
     "has_profile" : user.hasProfile,
   }).then((result) {
-    _progressDialog.dismiss();
+    _progressDialog.hide();
     _alertUpdateProfileData(context);
   }).catchError((error) => print(error));
 }
@@ -135,7 +135,7 @@ Future<void> _alertUpdateProfileData (BuildContext context) {
 
 
 ProgressDialog progressDialog (BuildContext context, ProgressDialogType progressDialogType, String message) {
-  ProgressDialog progressDialog = ProgressDialog (context, type: progressDialogType);
+  ProgressDialog progressDialog = ProgressDialog (context, type: progressDialogType, isDismissible: true);
   progressDialog.style(message: message);
 
   return progressDialog;

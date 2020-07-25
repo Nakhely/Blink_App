@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 
-Future <File> getImageFromGallery () async {
-  return await ImagePicker.pickImage(source: ImageSource.gallery);
+final _picker = ImagePicker();
+
+Future <PickedFile> getImageFromGallery () async {
+  return await _picker.getImage(source: ImageSource.gallery);
 }
 
-Future <File> getImageFromCamera () async {
-  return await ImagePicker.pickImage(source: ImageSource.camera);
+Future <PickedFile> getImageFromCamera () async {
+  return await _picker.getImage(source: ImageSource.camera);
 }

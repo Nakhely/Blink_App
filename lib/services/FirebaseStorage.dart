@@ -17,7 +17,7 @@ Future<String> downloadImage(String reference) async {
 }
 
 Future uploadImageToFirebaseStorage (BuildContext context, User user, String reference, File image) async {
-  ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal, 'Please wait');
+  ProgressDialog _progressDialog = progressDialog(context, ProgressDialogType.Normal,'Please wait');
   _progressDialog.show();
 
   await Firestore.instance.collection('users').document(user.id).setData({
@@ -33,7 +33,7 @@ Future uploadImageToFirebaseStorage (BuildContext context, User user, String ref
 
   StorageTaskSnapshot sts = await uploadTask.onComplete;
 
-  _progressDialog.dismiss();
+  _progressDialog.hide();
   _alertUpdateProfilePictures(context);
 }
 
@@ -58,7 +58,7 @@ Future publisPost (BuildContext context, File image, String message, String user
     "publish_date" : date
   });
 
-  _progressDialog.dismiss();
+  _progressDialog.hide();
   _alertPublisSuccesfull(context);
 }
 

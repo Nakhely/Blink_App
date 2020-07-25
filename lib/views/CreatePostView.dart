@@ -8,7 +8,7 @@ import 'package:Blink/models/User.dart';
 import 'package:Blink/services/FirebaseStorage.dart';
 import 'package:image_picker/image_picker.dart';
 
-File _image;
+PickedFile _image;
 String _message;
 
 class CreatePostView extends StatefulWidget {
@@ -78,7 +78,7 @@ class _CreatePostView extends State<CreatePostView> {
                             width: media.width,
                             decoration: BoxDecoration (
                               image: DecorationImage(
-                                image: FileImage (_image),
+                                image: FileImage( File( _image.path ) ),
                                 fit: BoxFit.cover,
                                 alignment: Alignment.center
                               ),
@@ -143,7 +143,10 @@ class _CreatePostView extends State<CreatePostView> {
       iconSize: 80,
       icon: Icon (Icons.add_photo_alternate, color: Color.fromRGBO(210, 206, 229, 1)),
       onPressed: () async {
-        _image = await getImageFromGallery();
+        PickedFile image = await getImageFromGallery();
+        setState(() {
+          _image = image;
+        });
       },
     );
   }
@@ -153,7 +156,10 @@ class _CreatePostView extends State<CreatePostView> {
       iconSize: 35,
       icon: Icon (Icons.add_photo_alternate, color: Color.fromRGBO(71, 67, 93, 1)),
       onPressed: () async {
-        _image = await getImageFromGallery();
+        PickedFile image = await getImageFromGallery();
+        setState(() {
+          _image = image;
+        });
       },
     );
   }
@@ -167,7 +173,7 @@ class _CreatePostView extends State<CreatePostView> {
           _alert(context);
         } else {
           String userName = widget.user.name + ' ' + widget.user.firstSurname + ' ' + widget.user.secondSurname;
-          publisPost(context, _image, _message, userName, widget.user.id);
+          publisPost(context, File(_image.path), _message, userName, widget.user.id);
         }
       },
     );

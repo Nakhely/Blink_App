@@ -9,6 +9,8 @@ import 'package:Blink/services/FirebaseAuthentication.dart';
 import 'package:Blink/services/FirebaseStorage.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../services/ImagePickerController.dart';
+
 File _image;
 
 class EditProfileView extends StatefulWidget {
@@ -113,7 +115,10 @@ class _EditProfileView extends State<EditProfileView> {
     return IconButton (
       icon: Icon (Icons.photo_library, color: Color.fromRGBO(210, 206, 229, 1)),
       onPressed: () async {
-        _image = await getImageFromGallery();
+        PickedFile image = await getImageFromGallery();
+        setState(() {
+          _image = File(image.path);
+        });
       },
     );
   }
@@ -122,7 +127,10 @@ class _EditProfileView extends State<EditProfileView> {
     return IconButton (
       icon: Icon (Icons.add_a_photo, color: Color.fromRGBO(210, 206, 229, 1)),
       onPressed: () async {
-        _image = await getImageFromCamera();
+        PickedFile image = await getImageFromCamera();
+        setState(() {
+          _image = File(image.path);
+        });
       },
     );
   }
