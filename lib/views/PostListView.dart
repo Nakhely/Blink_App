@@ -1,4 +1,5 @@
 
+import 'package:Blink/views/CommentsView.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -79,6 +80,25 @@ class _PostListView extends State<PostListView> {
                                     snapshot.data.documents[index].data['message'].toString()),
                               )
                             ],
+                          ),
+                          Row (
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded (
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding (
+                                      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                                      child: showCommentsButton(
+                                          context,
+                                          'Ver los ' + snapshot.data.documents[index].data['comments'].length.toString() + ' comentarios',
+                                          snapshot.data.documents[index].documentID
+                                      ),
+                                    )
+                                  ],
+                                )
+                              )
+                            ],
                           )
                         ],
                       ),
@@ -119,6 +139,22 @@ class _PostListView extends State<PostListView> {
       backgroundColor: Color.fromRGBO(210, 206, 229, 1),
       radius: 25.0,
       backgroundImage: NetworkImage(url),
+    );
+  }
+
+  Widget showCommentsButton (BuildContext context, String text, String _idPost) {
+    return FlatButton (
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onPressed: ()  {
+        Navigator.of(context).push(MaterialPageRoute (builder: (BuildContext context) => CommentsView(idPost: _idPost,)));
+      },
+      child: Text (
+        text,
+        style: TextStyle (
+            fontSize: 14
+        ),
+      ),
     );
   }
 
