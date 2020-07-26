@@ -55,6 +55,7 @@ Future publisPost (BuildContext context, File image, String message, String user
     "url_image" : downloadUrl,
     "name_user" : userName,
     "circle_avatar" : downloadUrlAvatarImage,
+    "comments" : FieldValue.arrayUnion([]),
     "publish_date" : date
   });
 

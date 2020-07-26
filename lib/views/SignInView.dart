@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:Blink/models/User.dart';
 import 'package:Blink/services/FirebaseAuthentication.dart';
 import 'package:Blink/views/HomeView.dart';
-import 'package:Blink/views/ProfileView.dart';
 
 String _email, _password;
 

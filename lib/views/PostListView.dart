@@ -1,4 +1,5 @@
 
+import 'package:Blink/models/User.dart';
 import 'package:Blink/views/CommentsView.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,6 +7,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PostListView extends StatefulWidget {
+
+  final User user;
+
+  const PostListView({Key key, this.user}) : super(key: key);
 
   @override
   _PostListView createState() => _PostListView();
@@ -72,34 +77,48 @@ class _PostListView extends State<PostListView> {
                           Row (
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Padding (
-                                padding: EdgeInsets.all(16),
-                                child: textMessage(
-                                    context,
-                                    snapshot.data.documents[index].data['name_user'].toString(),
-                                    snapshot.data.documents[index].data['message'].toString()),
+                              Expanded (
+                                child: Padding (
+                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                  child: textMessage(
+                                      context,
+                                      snapshot.data.documents[index].data['name_user'].toString(),
+                                      snapshot.data.documents[index].data['message'].toString()),
+                                ),
                               )
                             ],
                           ),
                           Row (
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Expanded (
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding (
-                                      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                                      child: showCommentsButton(
-                                          context,
-                                          'Ver los ' + snapshot.data.documents[index].data['comments'].length.toString() + ' comentarios',
-                                          snapshot.data.documents[index].documentID
-                                      ),
-                                    )
-                                  ],
-                                )
+                              Padding (
+                                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                child: comment2(context, snapshot.data.documents[index].documentID),
                               )
                             ],
-                          )
+                          ),
+
+                          Visibility (
+                            visible: (snapshot.data.documents[index].data['comments'].length == 0) ? false : true,
+                            child:  Row (
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded (
+                                    child: Row(
+                                      children: <Widget>[
+                                        Padding (
+                                          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                                          child: showCommentsButton(
+                                              context,
+                                              'Ver los ' + snapshot.data.documents[index].data['comments'].length.toString() + ' comentarios',
+                                              snapshot.data.documents[index].documentID
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -147,7 +166,7 @@ class _PostListView extends State<PostListView> {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: ()  {
-        Navigator.of(context).push(MaterialPageRoute (builder: (BuildContext context) => CommentsView(idPost: _idPost,)));
+        Navigator.of(context).push(MaterialPageRoute (builder: (BuildContext context) => CommentsView(idPost: _idPost, userData: widget.user)));
       },
       child: Text (
         text,
@@ -155,6 +174,16 @@ class _PostListView extends State<PostListView> {
             fontSize: 14
         ),
       ),
+    );
+  }
+
+  Widget comment2 (BuildContext context, String _idPost) {
+    return GestureDetector (
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute (builder: (BuildContext context) => CommentsView(idPost: _idPost, userData: widget.user)));
+      },
+
+      child: Icon (Icons.comment, color: Color.fromRGBO(71, 67, 93, 1), size: 29,),
     );
   }
 

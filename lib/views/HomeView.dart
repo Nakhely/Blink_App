@@ -23,7 +23,7 @@ class _HomeView extends State<HomeView> {
   @override
   void initState() {
     tabs = [
-      PostListView(),
+      PostListView(user: widget.user),
       CreatePostView (user: widget.user),
       ProfileView(user: widget.user)
     ];
